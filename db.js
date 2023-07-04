@@ -1,12 +1,13 @@
-const pgp = require('pg-promise')();
+const pgp = require("pg-promise")();
 
 // Update the connection string with your PostgreSQL database details
+
 const connection = {
-  host: 'localhost',
-  port: 5432,
-  database: 'marvella',
-  user: 'postgres',
-  password: 'Test@1001'  
+  host: process.env.HOST,
+  port: process.env.PORT,
+  database: process.env.DATABASE,
+  user: process.env.USER,
+  password: process.env.DB_PASS,
 };
 
 const db = pgp(connection);
@@ -43,10 +44,10 @@ const createTableQuery = `
 // Create the users table if it doesn't exist
 db.none(createTableQuery)
   .then(() => {
-    console.log('Users table created');
+    console.log("Users table created");
   })
-  .catch(error => {
-    console.error('Error occurred:', error);
+  .catch((error) => {
+    console.error("Error occurred:", error);
   });
 
 module.exports = db;
